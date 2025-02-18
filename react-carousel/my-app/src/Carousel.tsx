@@ -50,6 +50,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const onClickFnIcon = (index: number) => {
     setPause(true);
     setIsClicked(index);
+    setTimeout(() => setPause(false), 3000);
   };
 
   const icons = images.map((_, index) => (
@@ -64,11 +65,6 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   ));
 
   useEffect(() => {
-    const timeout = setTimeout(() => setPause(false), 3000);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
     if (pause) return;
     const timeoutId = setTimeout(() => {
       setIsClicked((prevState) => (prevState + 1) % arrayLength);
@@ -79,11 +75,13 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const onClickFnLeft = () => {
     setPause(true);
     setIsClicked((prevState) => (prevState - 1 + arrayLength) % arrayLength);
+    setTimeout(() => setPause(false), 3000);
   };
 
   const onClickFnRight = () => {
     setPause(true);
     setIsClicked((prevState) => (prevState + 1) % arrayLength);
+    setTimeout(() => setPause(false), 3000);
   };
 
   return (
